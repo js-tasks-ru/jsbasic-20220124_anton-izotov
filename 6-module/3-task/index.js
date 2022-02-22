@@ -60,26 +60,30 @@ export default class Carousel {
     let position = 0;
     const list = this.elem.querySelectorAll(".carousel__slide");
     prevBtn.style.display = "none";
+    let count = 0;
     for (const item of list) {
       nextBtn.onclick = function () {
-        const width = item.offsetWidth;
+        const width = liner.offsetWidth;
         position += width;
+        count += 1;
         liner.style.transform = `translateX(-${position}px)`;
-        if (position > width * 2) {
+        if (count === liner.children.length - 1) {
           nextBtn.style.display = "none";
         }
         if (position > 0) {
           prevBtn.style.display = "";
         }
       };
+
       prevBtn.onclick = function () {
         const width = item.offsetWidth;
         position -= width;
+        count -= 1;
         liner.style.transform = `translateX(${-position}px)`;
-        if (position <= width * 2) {
+        if (count < liner.children.length - 1) {
           nextBtn.style.display = "";
         }
-        if (position <= 0) {
+        if (count === 0) {
           prevBtn.style.display = "none";
         }
       };
